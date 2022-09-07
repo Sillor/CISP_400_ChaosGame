@@ -26,9 +26,16 @@ int main()
 	v2.setFillColor(Color(0, 255, 0));
 	v3.setFillColor(Color(0, 255, 0));
 
+	v1.getPosition();
+
+	RectangleShape spoint(Vector2f(4, 4));
+	spoint.setPosition(249, 249);
+	spoint.setFillColor(Color(255, 0, 0));
+
 	vector<RectangleShape> parr;
 
 	srand((int)time(0));
+
 
 	while (window.isOpen())
 	{
@@ -56,6 +63,8 @@ int main()
 			int pos1 = (rand() % 500);  
 			int pos2 = (rand() % 500);	//[0, 499]
 
+			int rvert = (rand() % 3);
+
 			parr[parr.size() - 1].setPosition(pos1, pos2);
 		}
 
@@ -72,6 +81,7 @@ int main()
 		window.draw(v1);
 		window.draw(v2);
 		window.draw(v3);
+		window.draw(spoint);
 
 		// Show everything we just drew
 		window.display();
