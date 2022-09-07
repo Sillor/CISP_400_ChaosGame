@@ -14,6 +14,8 @@ int main()
 	// Create and open a window for the game
 	RenderWindow window(vm, "ChaosGame", Style::Default);
 
+	vector<RectangleShape> parr;
+
 	RectangleShape point(Vector2f(2, 2));
 
 	RectangleShape v1(Vector2f(4, 4));
@@ -31,8 +33,9 @@ int main()
 	RectangleShape spoint(Vector2f(4, 4));
 	spoint.setPosition(249, 249);
 	spoint.setFillColor(Color(255, 0, 0));
+	parr.push_back(spoint);
 
-	vector<RectangleShape> parr;
+
 
 	srand((int)time(0));
 
@@ -65,6 +68,12 @@ int main()
 
 			int rvert = (rand() % 3);
 
+			switch (rvert)
+			{
+			case 0:
+				pos1 = abs(v1.getPosition().x) + abs(parr.size()));
+			}
+
 			parr[parr.size() - 1].setPosition(pos1, pos2);
 		}
 
@@ -81,7 +90,6 @@ int main()
 		window.draw(v1);
 		window.draw(v2);
 		window.draw(v3);
-		window.draw(spoint);
 
 		// Show everything we just drew
 		window.display();
