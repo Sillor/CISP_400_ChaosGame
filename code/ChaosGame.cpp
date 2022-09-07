@@ -14,6 +14,9 @@ int main()
 	// Create and open a window for the game
 	RenderWindow window(vm, "ChaosGame", Style::Default);
 
+	RectangleShape point1(Vector2f(2, 2));
+	point1.setPosition(249, 249);
+
 	while (window.isOpen())
 	{
 
@@ -40,9 +43,7 @@ int main()
 		Draw the scene
 		****************************************
 		*/
-
-		// Clear everything from the last frame
-		window.clear();
+		window.draw(point1);
 
 		// Show everything we just drew
 		window.display();
