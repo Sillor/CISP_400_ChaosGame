@@ -17,13 +17,18 @@ int main()
 	RectangleShape point(Vector2f(2, 2));
 
 	RectangleShape v1(Vector2f(4, 4));
+	RectangleShape v2(Vector2f(4, 4));
+	RectangleShape v3(Vector2f(4, 4));
+	v1.setPosition(249, 49);
+	v2.setPosition(49, 449);
+	v3.setPosition(449, 449);
+	v1.setFillColor(Color(0, 255, 0));
+	v2.setFillColor(Color(0, 255, 0));
+	v3.setFillColor(Color(0, 255, 0));
 
 	vector<RectangleShape> parr;
 
 	srand((int)time(0));
-
-	int x = 0;
-	int y = 0;
 
 	while (window.isOpen())
 	{
@@ -64,6 +69,9 @@ int main()
 		window.clear();
 
 		for (int i = 0; i < parr.size(); i++) window.draw(parr[i]);
+		window.draw(v1);
+		window.draw(v2);
+		window.draw(v3);
 
 		// Show everything we just drew
 		window.display();
