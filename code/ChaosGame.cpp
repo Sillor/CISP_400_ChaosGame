@@ -22,6 +22,8 @@ int main()
 	point3.setPosition(75, 100);
 
 
+	RectangleShape parr[100];
+
 	while (window.isOpen())
 	{
 
@@ -42,6 +44,16 @@ int main()
 		****************************************
 		*/
 
+		srand((int)time(0));
+
+		for (int i = 0; i < 100; i++)
+		{
+			parr[i].setSize(Vector2f(2, 2));
+			int pos1 = (rand() % 500);  //[0, 499]
+			int pos2 = (rand() % 500);
+			parr[i].setPosition(pos1, pos2);
+			window.draw(parr[i]);
+		}
 
 		/*
 		****************************************
@@ -49,8 +61,6 @@ int main()
 		****************************************
 		*/
 		window.draw(point1);
-		window.draw(point2);
-		window.draw(point3);
 
 		// Show everything we just drew
 		window.display();
