@@ -60,7 +60,7 @@ int main()
 		****************************************
 		*/
 
-		if (parr.size() < 500 * 500)
+		if (parr.size() < 1000 * 1000)
 		{
 			parr.push_back(point);
 			int pos1 = (rand() % 500);  
@@ -71,7 +71,17 @@ int main()
 			switch (rvert)
 			{
 			case 0:
-				pos1 = abs(v1.getPosition().x) + abs(parr.size()));
+				pos1 = (abs(v1.getPosition().x) + abs(parr[parr.size() - 2].getPosition().x)) / 2;
+				pos2 = (abs(v1.getPosition().y) + abs(parr[parr.size() - 2].getPosition().y)) / 2;
+				break;
+			case 1:
+				pos1 = (abs(v2.getPosition().x) + abs(parr[parr.size() - 2].getPosition().x)) / 2;
+				pos2 = (abs(v2.getPosition().y) + abs(parr[parr.size() - 2].getPosition().y)) / 2;
+				break;
+			case 2:
+				pos1 = (abs(v3.getPosition().x) + abs(parr[parr.size() - 2].getPosition().x)) / 2;
+				pos2 = (abs(v3.getPosition().y) + abs(parr[parr.size() - 2].getPosition().y)) / 2;
+				break;
 			}
 
 			parr[parr.size() - 1].setPosition(pos1, pos2);
