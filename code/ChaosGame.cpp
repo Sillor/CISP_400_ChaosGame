@@ -12,7 +12,7 @@ int main()
 	VideoMode vm(1000, 1000);
 
 	// Create and open a window for the game
-	RenderWindow window(vm, "ChaosGame", Style::Default);
+	RenderWindow window(vm, "ChaosGame", Style::Titlebar | Style::Close);
 
 	vector<RectangleShape> parr;
 
