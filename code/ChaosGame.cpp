@@ -9,33 +9,24 @@ using namespace std;
 int main()
 {
 	// Create a video mode object
-	VideoMode vm(500, 500);
+	VideoMode vm(1000, 1000);
 
 	// Create and open a window for the game
 	RenderWindow window(vm, "ChaosGame", Style::Default);
 
 	vector<RectangleShape> parr;
 
-	RectangleShape point(Vector2f(2, 2));
+	RectangleShape point(Vector2f(1, 1));
 
 	RectangleShape v1(Vector2f(4, 4));
 	RectangleShape v2(Vector2f(4, 4));
 	RectangleShape v3(Vector2f(4, 4));
-	v1.setPosition(249, 49);
-	v2.setPosition(49, 449);
-	v3.setPosition(449, 449);
-	v1.setFillColor(Color(0, 255, 0));
-	v2.setFillColor(Color(0, 255, 0));
-	v3.setFillColor(Color(0, 255, 0));
-
-	v1.getPosition();
 
 	RectangleShape spoint(Vector2f(4, 4));
-	spoint.setPosition(249, 249);
-	spoint.setFillColor(Color(255, 0, 0));
-	parr.push_back(spoint);
 
-
+	int mouseclicks = 0;
+	bool start = false;
+	bool mouse_locked = false;
 
 	srand((int)time(0));
 
@@ -48,10 +39,47 @@ int main()
 		Handle the players input
 		****************************************
 		*/
-
+		Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left)
+			{
+				mouse_locked = false;
+			}
+		}
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 		{
 			window.close();
+		}
+
+		if (Mouse::isButtonPressed(Mouse::Left) && mouseclicks < 3 && !mouse_locked)
+		{
+			mouseclicks++;
+			switch (mouseclicks)
+			{
+			case 1:
+				v1.setPosition(Mouse::getPosition(window).x, Mouse::getPosition(window).y);
+				v1.setFillColor(Color(0, 255, 0));
+			case 2:
+				v2.setPosition(Mouse::getPosition(window).x, Mouse::getPosition(window).y);
+				v2.setFillColor(Color(0, 255, 0));
+			case 3:
+				v3.setPosition(Mouse::getPosition(window).x, Mouse::getPosition(window).y);
+				v3.setFillColor(Color(0, 255, 0));
+			}
+			mouse_locked = true;
+
+		}
+
+		if (Mouse::isButtonPressed(Mouse::Left) && mouseclicks == 3 && start == false && !mouse_locked)
+		{
+			start = true;
+			int pos1 = (rand() % 1000);
+			int pos2 = (rand() % 1000); //[0, 999]
+			spoint.setPosition(pos1, pos2);
+			spoint.setFillColor(Color(255, 0, 0));
+			parr.push_back(spoint);
+			mouse_locked = true;
 		}
 
 		/*
@@ -60,11 +88,11 @@ int main()
 		****************************************
 		*/
 
-		if (parr.size() < 1000 * 1000)
+		if (parr.size() < (1000 * 1000) && start)
 		{
 			parr.push_back(point);
-			int pos1 = (rand() % 500);  
-			int pos2 = (rand() % 500);	//[0, 499]
+			int pos1 = (rand() % 1000);  
+			int pos2 = (rand() % 1000);	//[0, 999]
 
 			int rvert = (rand() % 3);
 
