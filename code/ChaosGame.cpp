@@ -30,6 +30,16 @@ int main()
 
 	srand((int)time(0));
 
+	Font font;
+	font.loadFromFile("fonts/editundo.ttf");
+
+	Text text;
+	text.setFont(font);
+	text.setCharacterSize(18);
+	text.setColor(Color::White);
+	text.setStyle(Text::Regular);
+	text.setString("Welcome to the Chaos Game!\n1. Start by placing three vertices\n  by left-clicking on the window\n2. Fourth click to start the algorithm\n  (also for the starting point)");
+	text.setPosition(15, 15);
 
 	while (window.isOpen())
 	{
@@ -76,7 +86,7 @@ int main()
 			start = true;
 			int pos1 = (rand() % 1000);
 			int pos2 = (rand() % 1000); //[0, 999]
-			spoint.setPosition(pos1, pos2);
+			spoint.setPosition(Mouse::getPosition(window).x, Mouse::getPosition(window).y);
 			spoint.setFillColor(Color(255, 0, 0));
 			parr.push_back(spoint);
 			mouse_locked = true;
@@ -115,8 +125,6 @@ int main()
 			parr[parr.size() - 1].setPosition(pos1, pos2);
 		}
 
-		//sleep(seconds(1));
-
 		/*
 		****************************************
 		Draw the scene
@@ -128,10 +136,10 @@ int main()
 		window.draw(v1);
 		window.draw(v2);
 		window.draw(v3);
+		window.draw(text);
 
 		// Show everything we just drew
 		window.display();
-
 
 	}
 
