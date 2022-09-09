@@ -17,7 +17,7 @@ int main() {
     vector < RectangleShape > parr;
 
     // Template point to start the vector
-    RectangleShape point(Vector2f(1, 1));
+    RectangleShape point(Vector2f(2, 2));
 
     // Declaring vertex points
     RectangleShape v1(Vector2f(4, 4));
@@ -49,7 +49,7 @@ int main() {
     instructions.setCharacterSize(21);
     instructions.setColor(Color::White);
     instructions.setStyle(Text::Regular);
-    instructions.setString("Welcome to the Chaos Game!\n1. Start by pressing number keys (1-4)\n	to choose fractal mode\n2. Place the vertices\n	by left-clicking on the window\n3. Last click to start the algorithm\n	(also for the starting point)");
+    instructions.setString("Welcome to the Chaos Game!\n1. Start by pressing the number keys (1-4)\n	to choose fractal mode\n2. Place the vertices\n	by left-clicking on the window\n3. Last click to start the algorithm\n	(also for the starting point)\n4. To restart press the number keys (1-4) again");
     instructions.setPosition(15, 15);
 
     // "Mode: " text
@@ -92,24 +92,44 @@ int main() {
             window.close();
         }
 
+
+        bool restart = false;
+
         // Allows to change the mode with number (1-4) keys if 3 or less vertices picked
-        if (mouseClicks <= 3) {
-            if (Keyboard::isKeyPressed(Keyboard::Num1)) {
-                mode = 0;
-                md.setString("Triangle");
-            }
-            else if (Keyboard::isKeyPressed(Keyboard::Num2)) {
-                mode = 1;
-                md.setString("Square");
-            }
-            else if (Keyboard::isKeyPressed(Keyboard::Num3)) {
-                mode = 2;
-                md.setString("Pentagon");
-            }
-            else if (Keyboard::isKeyPressed(Keyboard::Num4)) {
-                mode = 3;
-                md.setString("Hexagon");
-            }
+        
+        if (Keyboard::isKeyPressed(Keyboard::Num1)) {
+            mode = 0;
+            md.setString("Triangle");
+            restart = true;
+        }
+        else if (Keyboard::isKeyPressed(Keyboard::Num2)) {
+            mode = 1;
+            md.setString("Square");
+            restart = true;
+        }
+        else if (Keyboard::isKeyPressed(Keyboard::Num3)) {
+            mode = 2;
+            md.setString("Pentagon");
+            restart = true;
+        }
+        else if (Keyboard::isKeyPressed(Keyboard::Num4)) {
+            mode = 3;
+            md.setString("Hexagon");
+            restart = true;
+        }
+
+        if (restart == true) {
+            parr.clear();
+            mouseClicks = 0;
+            start = false;
+            int pos1 = -10;
+            int pos2 = -10;
+            v1.setPosition(pos1, pos2);
+            v2.setPosition(pos1, pos2);
+            v3.setPosition(pos1, pos2);
+            v4.setPosition(pos1, pos2);
+            v5.setPosition(pos1, pos2);
+            v6.setPosition(pos1, pos2);
         }
 
         // Places the vertices depending on the current mode
@@ -354,16 +374,19 @@ int main() {
         // Clear the frame
         window.clear();
 
-        // Vector
-        for (int i = 0; i < parr.size(); i++) window.draw(parr[i]);
+        if (restart == false) {
+            // Vector
+            for (int i = 0; i < parr.size(); i++) window.draw(parr[i]);
 
-        // Vertices
-        window.draw(v1);
-        window.draw(v2);
-        window.draw(v3);
-        window.draw(v4);
-        window.draw(v5);
-        window.draw(v6);
+            // Vertices
+            window.draw(v1);
+            window.draw(v2);
+            window.draw(v3);
+            window.draw(v4);
+            window.draw(v5);
+            window.draw(v6);
+
+        }
 
         // Text
         window.draw(instructions);
@@ -372,7 +395,6 @@ int main() {
 
         // Show everything we just drew
         window.display();
-
     }
 
     return 0;
