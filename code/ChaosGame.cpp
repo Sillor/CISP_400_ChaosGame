@@ -92,7 +92,7 @@ int main() {
             window.close();
         }
 
-
+        // Setting restart to false so it will draw again
         bool restart = false;
 
         // Allows to change the mode with number (1-4) keys if 3 or less vertices picked
@@ -118,7 +118,8 @@ int main() {
             restart = true;
         }
 
-        if (restart == true) {
+        // If restart, all variables set back to initial values
+        if (restart) {
             parr.clear();
             mouseClicks = 0;
             start = false;
@@ -374,19 +375,19 @@ int main() {
         // Clear the frame
         window.clear();
 
+        // Draw the vector points if not restarting
         if (restart == false) {
             // Vector
             for (int i = 0; i < parr.size(); i++) window.draw(parr[i]);
-
-            // Vertices
-            window.draw(v1);
-            window.draw(v2);
-            window.draw(v3);
-            window.draw(v4);
-            window.draw(v5);
-            window.draw(v6);
-
         }
+
+        // Vertices
+        window.draw(v1);
+        window.draw(v2);
+        window.draw(v3);
+        window.draw(v4);
+        window.draw(v5);
+        window.draw(v6);
 
         // Text
         window.draw(instructions);
